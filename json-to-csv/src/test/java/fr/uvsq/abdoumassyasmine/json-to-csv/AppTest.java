@@ -1,4 +1,4 @@
-package fr.uvsq.abdoumassyasmine.json-to-csv;
+package fr.uvsq.abdoumassyasmine;
 
 import static org.junit.Assert.assertTrue;
 

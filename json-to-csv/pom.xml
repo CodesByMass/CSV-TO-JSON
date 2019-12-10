@@ -16,7 +16,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
-		<main-class>fr.uvsq.abdoumassyasmine.json-to-csv.App</main-class>
+		<main-class>fr.uvsq.abdoumassyasmine.App</main-class>
 	</properties>
 
 
@@ -113,6 +113,8 @@
 				<configuration>
 					<archive>
 						<manifest>
+							<addClasspath>true</addClasspath>
+            				<classpathPrefix>lib/</classpathPrefix>
 							<mainClass>${main-class}</mainClass>
 						</manifest>
 					</archive>

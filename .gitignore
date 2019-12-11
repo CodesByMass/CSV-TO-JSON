@@ -17,6 +17,10 @@ buildNumber.properties
 # Log file
 *.log
 
+#Binary files
+
+bin/
+
 # BlueJ files
 *.ctxt
 

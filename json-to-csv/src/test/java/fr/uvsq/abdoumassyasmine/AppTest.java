@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package fr.uvsq.abdoumassyasmine;
 
 import static org.junit.Assert.assertTrue;
@@ -18,3 +19,25 @@ public class AppTest
         assertTrue( true );
     }
 }
+=======
+package fr.uvsq.abdoumassyasmine;
+
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
+
+/**
+ * Unit test for simple App.
+ */
+public class AppTest 
+{
+    /**
+     * Rigorous Test :-)
+     */
+    @Test
+    public void shouldAnswerWithTrue()
+    {
+        assertTrue( true );
+    }
+}
+>>>>>>> Binding csv file

@@ -24,6 +24,9 @@ bin/
 #Settings 
 .settings/
 
+#vscode
+.vscode/
+
 # BlueJ files
 *.ctxt
 

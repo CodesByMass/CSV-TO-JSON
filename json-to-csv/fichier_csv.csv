@@ -1,0 +1,4 @@
+batters.batter[1].id;batters.batter[1].type;batters.batter[2].id;batters.batter[2].type;batters.batter[3].id;batters.batter[3].type;batters.batter[4].id;batters.batter[4].type;id;name;ppu;topping[1].id;topping[1].type;topping[2].id;topping[2].type;topping[3].id;topping[3].type;topping[4].id;topping[4].type;topping[5].id;topping[5].type;topping[6].id;topping[6].type;topping[7].id;topping[7].type;type
+1001;Regular;1002;Chocolate;1003;Blueberry;1004;Devil's Food;0001;Cake;0.55;5001;None;5002;Glazed;5005;Sugar;5007;Powdered Sugar;5006;Chocolate with Sprinkles;5003;Chocolate;5004;Maple;donut
+1001;Regular;;;;;;;0002;Raised;0.55;5001;None;5002;Glazed;5005;Sugar;5003;Chocolate;5004;Maple;;;;;donut
+1001;Regular;1002;Chocolate;;;;;0003;Old Fashioned;0.55;5001;None;5002;Glazed;5003;Chocolate;5004;Maple;;;;;;;donut

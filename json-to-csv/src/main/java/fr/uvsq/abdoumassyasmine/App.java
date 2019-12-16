@@ -11,6 +11,7 @@ import java.util.Set;
 
 import java.io.IOException;
 import java.util.Scanner;
+
 public class App 
 {
 	public static void jsonTocsv(String file_in, String file_out)throws IOException, NullPointerException
@@ -125,4 +126,3 @@ public class App
     	ihm();
     }
  }
-

@@ -1,6 +1,6 @@
 package fr.uvsq.abdoumassyasmine;
 
-import org.apache.log4j.BasicConfigurator;
+import org.apache.logging.log4j.*;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -16,7 +16,7 @@ public class App
 {
 	public static void jsonTocsv(String file_in, String file_out)throws IOException, NullPointerException
 	{
-		BasicConfigurator.configure();
+		/*BasicConfigurator.configure();*/
     	String chaine="" ;
    	    /*
         * Analyser une chaîne JSON et la convertir en CSV

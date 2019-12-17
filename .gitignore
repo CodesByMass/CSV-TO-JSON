@@ -22,8 +22,15 @@ buildNumber.properties
 bin/
 
 #Settings 
+.factorypath
+
+/.settings
 .settings/
 
+#IDE
+.project
+.classpath
+/.json-to-csv/.classpath
 #vscode
 .vscode/
 

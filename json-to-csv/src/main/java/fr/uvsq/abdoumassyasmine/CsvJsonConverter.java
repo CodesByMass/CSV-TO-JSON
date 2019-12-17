@@ -62,17 +62,21 @@ public class CsvJsonConverter {
 	 * Converts the CSV File into a JSON File
 	 * 
 	 * @param CSV_File
-	 * The csv file given by the user
+	 * The name of csv file given by the user
+	 *
+	 * @param JSON_File
+	 * The name of the Output file wanted by the user
 	 * 
 	 * @throws IOException
 	 * Could occur when we read the file with the MappingIterator
 	 */
-	public static void convertToJson(File CSV_File) throws IOException
+	public static void convertToJson(String CSV_File, String JSON_File) throws IOException
 	{
 
-	File csvFile = CSV_File ;
+	File csvFile = new File(CSV_File) ;
 	// Get the name of the file, for the new one in JSON
-	String file_name = csvFile.getName().replaceFirst("[.][^.]+$", "");;
+	// EDIT: Deprecated since the chief Abdoulaye wanted two strings in the params
+	// String file_name = csvFile.getName().replaceFirst("[.][^.]+$", "");;
 	CsvMapper mapper = new CsvMapper();
 	CsvSchema schema = CsvSchema.emptySchema().withHeader(); // use first row as header; otherwise defaults are fine
 	MappingIterator<Map<String,String>> it = mapper.readerFor(Map.class)
@@ -90,7 +94,7 @@ public class CsvJsonConverter {
 		ObjectMapper mapperObject = new ObjectMapper() ;
 		
 		// Write JSON formated data to output.json file
-		mapperObject.writerWithDefaultPrettyPrinter().writeValue(new File(file_name+".json"),readObjectsFromCsv);
+		mapperObject.writerWithDefaultPrettyPrinter().writeValue(new File(JSON_File),readObjectsFromCsv);
 
 		
 		} catch (JsonGenerationException e) {

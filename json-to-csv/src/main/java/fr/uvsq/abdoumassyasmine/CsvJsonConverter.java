@@ -78,7 +78,7 @@ public class CsvJsonConverter {
 	// EDIT: Deprecated since the chief Abdoulaye wanted two strings in the params
 	// String file_name = csvFile.getName().replaceFirst("[.][^.]+$", "");;
 	CsvMapper mapper = new CsvMapper();
-	CsvSchema schema = CsvSchema.emptySchema().withHeader(); // use first row as header; otherwise defaults are fine
+	CsvSchema schema = CsvSchema.emptySchema().withHeader().withColumnSeparator(';'); // use first row as header; otherwise defaults are fine
 	MappingIterator<Map<String,String>> it = mapper.readerFor(Map.class)
 	   .with(schema)
 	   .readValues(csvFile);

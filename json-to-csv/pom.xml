@@ -71,9 +71,9 @@
 	</dependency>
 
 	<dependency>
-    <groupId>com.fasterxml.jackson.core</groupId>
-    <artifactId>jackson-core</artifactId>
-    <version>2.9.8</version>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-core</artifactId>
+	    <version>2.9.8</version>
 	</dependency>
 
 
@@ -92,22 +92,28 @@
 	    <version>20190722</version>
 	</dependency>
 
+	<dependency>
+      <groupId>com.github.spotbugs</groupId>
+      <artifactId>spotbugs</artifactId>
+      <version>4.0.0-beta4</version>
+    </dependency>
+
   </dependencies>
 
   <reporting>
 		<plugins>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>findbugs-maven-plugin</artifactId>
-				<version>3.0.4</version>
-				<configuration>
-					<xmlOutput>true</xmlOutput>
-					<!-- Optional directory to put findbugs xdoc xml report -->
-					<xmlOutputDirectory>target/site</xmlOutputDirectory>
-				</configuration>
-			</plugin>
+			        <groupId>org.codehaus.mojo</groupId>
+			        <artifactId>findbugs-maven-plugin</artifactId>
+			        <version>3.0.6-SNAPSHOT</version>
+		      </plugin>
+		      <plugin>
+		          <groupId>com.github.spotbugs</groupId>
+		          <artifactId>spotbugs-maven-plugin</artifactId>
+		          <version>3.1.12.2</version>
+		      </plugin>
 		</plugins>
-	</reporting>
+ </reporting>
 
 
  <build>

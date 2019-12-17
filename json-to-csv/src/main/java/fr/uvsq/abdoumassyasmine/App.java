@@ -102,6 +102,8 @@ public class App
 					/**
 					 * appel de la fonction de conversion
 					 */
+					CsvJsonConverter csv = new CsvJsonConverter();
+					csv.convertToJson(file_in,file_out);
 					System.out.println("Conversion terminée");
 					arret = true;
 				}

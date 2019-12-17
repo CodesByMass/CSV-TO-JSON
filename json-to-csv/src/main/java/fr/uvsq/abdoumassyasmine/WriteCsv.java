@@ -16,15 +16,10 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.json.JSONException;
-
+import fr.uvsq.abdoumassyasmine.*;
 
 public class WriteCsv {
-	/*
-     * L'enregistreur de classe
-     */
-    private static final Logger LOGGER = Logger.getLogger(WriteCsv .class);
-
-
+	
     /**
      * Écrivez le CSV donné d'un json plat dans le fichier donné.
      * @param fluxJson

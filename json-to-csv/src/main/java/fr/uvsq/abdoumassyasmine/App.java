@@ -1,6 +1,5 @@
 package fr.uvsq.abdoumassyasmine;
 
-import org.apache.logging.log4j.*;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -8,15 +7,20 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.json.JSONArray;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import java.io.IOException;
 import java.util.Scanner;
-
+import fr.uvsq.abdoumassyasmine.*;
 public class App 
 {
 	public static void jsonTocsv(String file_in, String file_out)throws IOException, NullPointerException
 	{
-		/*BasicConfigurator.configure();*/
+		 ReadJson parser = new  ReadJson();
+		WriteCsv writer = new WriteCsv();
+
     	String chaine="" ;
    	    /*
         * Analyser une chaîne JSON et la convertir en CSV

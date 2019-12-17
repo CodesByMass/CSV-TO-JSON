@@ -17,27 +17,9 @@ import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import fr.uvsq.abdoumassyasmine.*;
 public class ReadJson {
 	 /**
-     * Le type JSONObject
-     **/
-    private static final Class JSON_OBJECT = JSONObject.class;
-    /**
-    * Le type JSONArray
-    **/
-    private static final Class JSON_ARRAY = JSONArray.class;
-    /**
-    * L'enregistreur de classe
-    **/
-    private static final Logger LOGGER = Logger.getLogger(ReadJson.class);
-   
-    
-
-    
-    
-    
-     /**
      * Analyser le fichier JSON en utilisant l'encodage de caractères spécifié
      *
      * @param file
@@ -155,10 +137,10 @@ public class ReadJson {
             String key = Conteneur.next().toString();
 
             try {
-				if (obj.get(key).getClass() == JSON_OBJECT) {
+				if (obj.get(key) instanceof JSONObject) {
 				    JSONObject jsonObject = (JSONObject) obj.get(key);
 				    flatten_JSON_OBJECT(jsonObject, fluxJson, _prefix + key);
-				} else if (obj.get(key).getClass() == JSON_ARRAY) {
+				} else if (obj.get(key) instanceof JSONArray) {
 				    JSONArray jsonArray = (JSONArray) obj.get(key);
 
 				    if (jsonArray.length() < 1) {
@@ -193,7 +175,7 @@ public class ReadJson {
 
         for (int i = 0; i < length; i++) {
             try {
-				if (obj.get(i).getClass() == JSON_ARRAY) {
+				if (obj.get(i) instanceof JSONArray) {
 				    JSONArray jsonArray = (JSONArray) obj.get(i);
 
 				    if (jsonArray.length() < 1) {
@@ -201,7 +183,7 @@ public class ReadJson {
 				    }
 
 				    flatten_JSON_ARRAY(jsonArray, fluxJson, prefix + "[" + i + "]");
-				} else if (obj.get(i).getClass() == JSON_OBJECT) {
+				} else if (obj.get(i) instanceof JSONObject) {
 				    JSONObject jsonObject = (JSONObject) obj.get(i);
 				    flatten_JSON_OBJECT(jsonObject, fluxJson, prefix + "[" + (i + 1) + "]");
 				} else {

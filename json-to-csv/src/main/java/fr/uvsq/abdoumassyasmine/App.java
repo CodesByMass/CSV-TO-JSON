@@ -77,8 +77,14 @@ public class App
 		boolean arret = false;
 		String file_in = new String();
 		String file_out = new String();
+		String directory = new String();
 		
 		Scanner _sc = new Scanner(System.in);
+		System.out.println("Entrée le path de l'application:");
+		if(_sc.hasNext())
+		{
+			directory = _sc.nextLine();
+		}
 		while(arret == false){
 			
 			System.out.println("CONVERTION CSV TO JSON/JSON TO CSV");
@@ -106,7 +112,7 @@ public class App
 				 */
 				if(file_in.endsWith(".json") == true)
 				{
-					if(checkExistsFile("C:/Users/Hamila/workspace/projet_final_java/CSV-TO-JSON/json-to-csv", file_in)==1)
+					if(checkExistsFile(directory, file_in)==1)
 					{
 						System.out.println("Veillez Saisir le nom du fichier de sortie : ");
 						file_out = _sc.nextLine();
@@ -159,7 +165,7 @@ public class App
 				 */
 				if(file_in.endsWith(".csv")==true)
 				{
-					if(checkExistsFile("/home/ablo/Bureau/CSV-TO-JSON", file_in)==1)
+					if(checkExistsFile(directory, file_in)==1)
 					{	
 						System.out.println("Veillez Saisir le nom du fichier de sortie : ");
 						file_out = _sc.nextLine();

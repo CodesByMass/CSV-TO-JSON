@@ -28,7 +28,7 @@ public class WriteCsv {
      * @param headers
      * @throws  IOException
      */
-    public static void writeLargeFile(List<Map<String, String>> fluxJson, String separator, String fileName, Set<String> headers){
+    public static void writetocsv(List<Map<String, String>> string_Json, String separator, String fileName, Set<String> headers){
     	String csvString;
         csvString = StringUtils.join(headers.toArray(), separator) + "\n";
         File file = new File(fileName);
@@ -37,9 +37,9 @@ public class WriteCsv {
             
             FileUtils.write(file, csvString, "ISO8859_1");
             
-            for (Map<String, String> map : fluxJson) {
+            for (Map<String, String> map : string_Json) {
             	csvString = "";
-            	csvString = getSeperatedColumns(headers, map, separator) + "\n";
+            	csvString = entete_sep(headers, map, separator) + "\n";
             	Files.write(Paths.get(fileName), csvString.getBytes("ISO8859_1"), StandardOpenOption.APPEND);
             }            
         } catch (IOException e) {
@@ -54,14 +54,14 @@ public class WriteCsv {
      * @param separator
    
      */
-    private static String getSeperatedColumns(Set<String> headers, Map<String, String> map, String separator) {
-        List<String> items = new ArrayList<String>();
+    private static String entete_sep(Set<String> headers, Map<String, String> map, String separator) {
+        List<String> art= new ArrayList<String>();
         for (String header : headers) {
             String value = map.get(header) == null ? "" : map.get(header).replaceAll("[\\,\\;\\r\\n\\t\\s]+", " "); 
-            items.add(value);
+            art.add(value);
         }
 
-        return StringUtils.join(items.toArray(), separator);
+        return StringUtils.join(art.toArray(), separator);
     }
 
   
@@ -74,11 +74,11 @@ public class WriteCsv {
      * @param headers
      * @throws  IOException
      */
-    public static Set<String> collectOrdered(List<Map<String, String>> fluxJson) {
-        Set<String> headers = new TreeSet<String>();
-        for (Map<String, String> map : fluxJson) {
-        	headers.addAll(map.keySet());
+    public static Set<String> ecriture_csv(List<Map<String, String>> string_Json) {
+        Set<String> ent = new TreeSet<String>();
+        for (Map<String, String> map : string_Json) {
+        	ent.addAll(map.keySet());
         }
-        return headers;
+        return ent;
     }       
 }

@@ -25,11 +25,11 @@ public class App
    	    /*
         * Analyser une chaîne JSON et la convertir en CSV
         */
-    	List<Map<String, String>>  fluxJson = ReadJson.tarit_Json(chaine);
+    	List<Map<String, String>>  string_Json = ReadJson.tarit_Json(chaine);
         
-   	 	fluxJson = ReadJson.parseJson(new File(file_in), "UTF-8");
-        Set<String> header =  WriteCsv.collectOrdered( fluxJson);
-        WriteCsv.writeLargeFile( fluxJson, ";", file_out, header);
+   	 	string_Json = ReadJson.parseJson(new File(file_in), "UTF-8");
+        Set<String> ent =  WriteCsv.ecriture_csv( string_Json);
+        WriteCsv.writetocsv( string_Json, ";", file_out, ent);
 	}
 	
 	public static void ihm()throws IOException, NullPointerException,InvalidFileTypeException

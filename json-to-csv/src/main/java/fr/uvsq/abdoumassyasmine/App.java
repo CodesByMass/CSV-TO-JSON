@@ -39,11 +39,11 @@ public class App
    	    /*
         * Analyser une chaîne JSON et la convertir en CSV
         */
-    	List<Map<String, String>>  fluxJson = ReadJson.tarit_Json(chaine);
+    	List<Map<String, String>>  string_json = ReadJson.tarit_Json(chaine);
         
-   	 	fluxJson = ReadJson.parseJson(new File(file_in), "UTF-8");
-        Set<String> header =  WriteCsv.collectOrdered( fluxJson);
-        WriteCsv.writeLargeFile( fluxJson, ";", file_out, header);
+   	 	string_json = ReadJson.parseJson(new File(file_in), "UTF-8");
+        Set<String> header =  WriteCsv.ecriture_csv(string_json);
+        WriteCsv.writetocsv( string_json, ";", file_out, header);
 	}
 	
 	/**
@@ -106,7 +106,7 @@ public class App
 				 */
 				if(file_in.endsWith(".json") == true)
 				{
-					if(checkExistsFile("/home/ablo/Bureau/CSV-TO-JSON/", file_in)==1)
+					if(checkExistsFile("C:/Users/Hamila/workspace/projet_final_java/CSV-TO-JSON/json-to-csv", file_in)==1)
 					{
 						System.out.println("Veillez Saisir le nom du fichier de sortie : ");
 						file_out = _sc.nextLine();

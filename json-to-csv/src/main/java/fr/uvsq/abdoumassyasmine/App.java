@@ -18,7 +18,7 @@ public class App
 {
 	public static void jsonTocsv(String file_in, String file_out)throws IOException, NullPointerException
 	{
-		 ReadJson parser = new  ReadJson();
+		ReadJson parser = new  ReadJson();
 		WriteCsv writer = new WriteCsv();
 
     	String chaine="" ;
@@ -32,7 +32,7 @@ public class App
         WriteCsv.writeLargeFile( fluxJson, ";", file_out, header);
 	}
 	
-	public static void ihm()throws IOException, NullPointerException
+	public static void ihm()throws IOException, NullPointerException,InvalidFileTypeException
 	{
 		int choix;
 		boolean arret = false;
@@ -58,30 +58,36 @@ public class App
 				{
 					file_in = _sc.nextLine();
 				}
-				
-				System.out.println("Veillez Saisir le nom du fichier de sortie : ");
-				file_out = _sc.nextLine();
-				while(file_out.isEmpty())
+				if(file_in.endsWith(".json") == true)
 				{
+					System.out.println("Veillez Saisir le nom du fichier de sortie : ");
 					file_out = _sc.nextLine();
+					while(file_out.isEmpty())
+					{
+						file_out = _sc.nextLine();
+					}
+					
+					if(file_out.endsWith(".csv")== true) 
+					{
+						System.out.println("Souhaitez vous convertir o/n?");
+						String c = _sc.nextLine();
+						if(c.charAt(0) == 'o')
+						{
+							/**
+							 * appel de la fonction de conversion
+							 */
+							jsonTocsv(file_in,file_out);
+							System.out.println("Conversion terminée");
+							arret = true;
+						}
+						else { System.out.println("Conversion annulée"); arret = false;}
+					}
+					else
+					{
+						throw new InvalidFileTypeException();
+					}
 				}
-				
-				System.out.println("Souhaitez vous convertir o/n?");
-				String c = _sc.nextLine();
-				if(c.charAt(0) == 'o')
-				{
-					/**
-					 * appel de la fonction de conversion
-					 */
-					jsonTocsv(file_in,file_out);
-					System.out.println("Conversion terminée");
-					arret = true;
-				}
-				else
-				{
-					System.out.println("Bye Bye");
-					arret = false;
-				}
+				else { throw new InvalidFileTypeException();}
 				
 			}
 			else if(choix == 2)
@@ -95,25 +101,39 @@ public class App
 					file_in = _sc.nextLine();
 				}
 				
-				System.out.println("Veillez Saisir le nom du fichier de sortie : ");
-				file_out = _sc.nextLine();
-				if(file_out.isEmpty()) file_out = file_in;
-				
-				System.out.println("Souhaitez vous convertir o/n?");
-				String c = _sc.nextLine();
-				if(c.charAt(0) == 'o')
+				if(file_in.endsWith(".csv")==true)
 				{
-					/**
-					 * appel de la fonction de conversion
-					 */
-					CsvJsonConverter.convertToJson(file_in,file_out);
-					System.out.println("Conversion terminée");
-					arret = true;
+					System.out.println("Veillez Saisir le nom du fichier de sortie : ");
+					file_out = _sc.nextLine();
+					while(file_out.isEmpty())
+					{
+						file_out = _sc.nextLine();
+					}
+					
+					if((file_out.endsWith(".json") == true)) 
+					{
+						System.out.println("Souhaitez vous convertir o/n?");
+						String c = _sc.nextLine();
+						if(c.charAt(0) == 'o')
+						{
+							/**
+							 * appel de la fonction de conversion
+							 */
+							CsvJsonConverter.convertToJson(file_in,file_out);
+							System.out.println("Conversion terminée");
+							arret = true;
+						}
+						else { System.out.println("Conversion annulée"); arret = false;}
+						
+					}
+					else
+					{
+						throw new InvalidFileTypeException();
+					}
 				}
 				else
 				{
-					System.out.println("Conversion Annuler");
-					arret = false;
+					throw new InvalidFileTypeException();
 				}
 			}
 			else
@@ -126,7 +146,7 @@ public class App
 	}
 
 	
-    public static void main( String[] args )throws IOException, NullPointerException 
+    public static void main( String[] args )throws IOException, NullPointerException,InvalidFileTypeException 
     {
     	ihm();
     }

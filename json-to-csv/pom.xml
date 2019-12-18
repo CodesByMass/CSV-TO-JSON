@@ -121,7 +121,14 @@
 			<plugin>
 		        <groupId>org.apache.maven.plugins</groupId>
 		        <artifactId>maven-javadoc-plugin</artifactId>
-		        <version>3.0.1</version>
+		        <version>3.1.1</version>
+		        <reportSets>
+				  <reportSet>
+				    <reports>
+					  <report>javadoc</report>
+				    </reports>
+				  </reportSet>
+			    </reportSets>
 			</plugin>
 
 			 <plugin>
@@ -162,75 +169,77 @@
 			</extension>
 		</extensions>
 
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+	    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId> maven-archetype-plugin</artifactId>
+					<version> 3.0.1 </version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		
 		<plugins>
+
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId> maven-archetype-plugin</artifactId>
-				<version> 3.0.1 </version>
+					<artifactId>maven-source-plugin</artifactId>
+					<version>3.0.1</version>
+					<executions>
+						<execution>
+							<id>attach-sources</id>
+							<phase>package</phase>
+							<goals>
+								<goal>jar-no-fork</goal>
+							</goals>
+						</execution>
+					</executions>
 			</plugin>
-		</plugins>
-	</pluginManagement>
-	
-	<plugins>
+		
 
-		<plugin>
-				<artifactId>maven-source-plugin</artifactId>
-				<version>3.0.1</version>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<phase>package</phase>
-						<goals>
-							<goal>jar-no-fork</goal>
-						</goals>
-					</execution>
-				</executions>
-		</plugin>
-	
-
-       		<!-- Transformation du jar en exécutable -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.0.2</version>
-				<configuration>
-					<archive>
-						<manifest>
-							<addClasspath>true</addClasspath>
-            				<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>${main-class}</mainClass>
-						</manifest>
-					</archive>
-				</configuration>
-			</plugin>
+	       		<!-- Transformation du jar en exécutable -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>3.0.2</version>
+					<configuration>
+						<archive>
+							<manifest>
+								<addClasspath>true</addClasspath>
+	            				<classpathPrefix>lib/</classpathPrefix>
+								<mainClass>${main-class}</mainClass>
+							</manifest>
+						</archive>
+					</configuration>
+				</plugin>
 
 
-			<!-- utilisation de assembly pour générer l'archive du projet contenant 
-				ces dépendances -->
-			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>3.1.0</version>
-				<configuration>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
-					<archive>
-						<manifest>
-							<mainClass>${main-class}</mainClass>
-						</manifest>
-					</archive>
-				</configuration>
-				<executions>
-					<execution>
-						<id>make-assembly</id>
-						<phase>package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+				<!-- utilisation de assembly pour générer l'archive du projet contenant 
+					ces dépendances -->
+				<plugin>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>3.1.0</version>
+					<configuration>
+						<descriptorRefs>
+							<descriptorRef>jar-with-dependencies</descriptorRef>
+						</descriptorRefs>
+						<archive>
+							<manifest>
+								<mainClass>${main-class}</mainClass>
+							</manifest>
+						</archive>
+					</configuration>
+					<executions>
+						<execution>
+							<id>make-assembly</id>
+							<phase>package</phase>
+							<goals>
+								<goal>single</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+
+
 
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>

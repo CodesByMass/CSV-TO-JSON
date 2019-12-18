@@ -22,6 +22,14 @@ import java.util.Scanner;
 
 public class App 
 {
+	/**
+	 * La methode qui permet de convertir un fichier 
+	 * json en csv
+	 * @param file_in réprésente le fichier à convertir
+	 * @param file_out réprésente le fichier de sortie
+	 * @throws IOException
+	 * @throws NullPointerException
+	 */
 	public static void jsonTocsv(String file_in, String file_out)throws IOException, NullPointerException
 	{
 		ReadJson parser = new  ReadJson();
@@ -38,6 +46,12 @@ public class App
         WriteCsv.writeLargeFile( fluxJson, ";", file_out, header);
 	}
 	
+	/**
+	 * La methode qui permet de savoir si un fichier existe
+	 * @param directory le repertoire concernée par la verification
+	 * @param file 
+	 * @return
+	 */
 	public static int checkExistsFile(String directory, String file) {
 		try (Stream<Path> walk = Files.walk(Paths.get(directory))) {
 
@@ -52,6 +66,11 @@ public class App
 		return 1;
 	}
 	
+	/**
+	 * Cette methode represente l'interface entre l'utilisateur
+	 * et l'application
+	 * elle gère les entrées et sorties du
+	 */
 	public static void ihm()throws IOException, NullPointerException,InvalidFileTypeException,FileNotExistException
 	{
 		int choix;
@@ -74,10 +93,17 @@ public class App
 				System.out.println("Veillez Saisir le nom du fichier d'entrée : ");
 				file_in = _sc.nextLine();
 				
+				/**
+				 * Obligation de l'utilisateur à taper quelque chose avant de passer
+				 */
 				while(file_in.isEmpty())
 				{
 					file_in = _sc.nextLine();
 				}
+				/**
+				 * verification du type du fichier 
+				 * si c'est un .json
+				 */
 				if(file_in.endsWith(".json") == true)
 				{
 					if(checkExistsFile("/home/ablo/Bureau/CSV-TO-JSON/", file_in)==1)
@@ -96,7 +122,7 @@ public class App
 							if(c.charAt(0) == 'o')
 							{
 								/**
-								 * appel de la fonction de conversion
+								 * appel de la fonction de conversion jsonTocsv
 								 */
 								jsonTocsv(file_in,file_out);
 								System.out.println("Conversion terminée");
@@ -127,6 +153,10 @@ public class App
 					file_in = _sc.nextLine();
 				}
 				
+				/**
+				 * verification du type du fichier 
+				 * si c'est un .json
+				 */
 				if(file_in.endsWith(".csv")==true)
 				{
 					if(checkExistsFile("/home/ablo/Bureau/CSV-TO-JSON", file_in)==1)

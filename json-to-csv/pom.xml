@@ -24,60 +24,57 @@
   <dependencies>
   
   <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
-<dependency>
-    <groupId>org.apache.commons</groupId>
-    <artifactId>commons-collections4</artifactId>
-    <version>4.4</version>
-</dependency>
-  <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
-<dependency>
-    <groupId>org.slf4j</groupId>
-    <artifactId>slf4j-api</artifactId>
-    <version>1.7.28</version>
-</dependency>
+	<dependency>
+	    <groupId>org.apache.commons</groupId>
+	    <artifactId>commons-collections4</artifactId>
+	    <version>4.4</version>
+	</dependency>
+	  <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+	<dependency>
+	    <groupId>org.slf4j</groupId>
+	    <artifactId>slf4j-api</artifactId>
+	    <version>1.7.28</version>
+	</dependency>
+	  
+	  <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+	<dependency>
+	    <groupId>org.apache.commons</groupId>
+	    <artifactId>commons-lang3</artifactId>
+	    <version>3.8</version>
+	</dependency>
+	  <!-- https://mvnrepository.com/artifact/org.apache.sling/org.apache.sling.commons.json -->
+	<dependency>
+	    <groupId>org.apache.sling</groupId>
+	    <artifactId>org.apache.sling.commons.json</artifactId>
+	    <version>2.0.20</version>
+	    <scope>provided</scope>
+	</dependency>
   
-  <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
-<dependency>
-    <groupId>org.apache.commons</groupId>
-    <artifactId>commons-lang3</artifactId>
-    <version>3.8</version>
-</dependency>
-  <!-- https://mvnrepository.com/artifact/org.apache.sling/org.apache.sling.commons.json -->
-<dependency>
-    <groupId>org.apache.sling</groupId>
-    <artifactId>org.apache.sling.commons.json</artifactId>
-    <version>2.0.20</version>
-    <scope>provided</scope>
-</dependency>
-  
+	  <dependency>
+	    <groupId>log4j</groupId>
+	    <artifactId>log4j</artifactId>
+	    <version>1.2.17</version>
+	  </dependency>
 
-  
-  <dependency>
-    <groupId>log4j</groupId>
-    <artifactId>log4j</artifactId>
-    <version>1.2.17</version>
-  </dependency>
+	  <dependency>
+	    <groupId>org.apache.logging.log4j</groupId>
+	    <artifactId>log4j-api</artifactId>
+	    <version>2.13.0</version>
+	  </dependency>
 
-  <dependency>
-    <groupId>org.apache.logging.log4j</groupId>
-    <artifactId>log4j-api</artifactId>
-    <version>2.13.0</version>
-  </dependency>
-  <dependency>
-    <groupId>org.apache.logging.log4j</groupId>
-    <artifactId>log4j-core</artifactId>
-    <version>2.13.0</version>
-  </dependency>
+	  <dependency>
+	    <groupId>org.apache.logging.log4j</groupId>
+	    <artifactId>log4j-core</artifactId>
+	    <version>2.13.0</version>
+	  </dependency>
   
   	
  <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
-<dependency>
-    <groupId>commons-io</groupId>
-    <artifactId>commons-io</artifactId>
-    <version>2.6</version>
-</dependency>
- 
-  
+	<dependency>
+	    <groupId>commons-io</groupId>
+	    <artifactId>commons-io</artifactId>
+	    <version>2.6</version>
+	</dependency>
         
 	<dependency>
 	    <groupId>com.fasterxml.jackson.dataformat</groupId>
@@ -96,8 +93,6 @@
 	    <artifactId>jackson-core</artifactId>
 	    <version>2.9.8</version>
 	</dependency>
-
-
 	
     <dependency>
       <groupId>junit</groupId>
@@ -119,20 +114,41 @@
       <version>4.0.0-beta4</version>
     </dependency>
 
-  </dependencies>
+ </dependencies>
 
   <reporting>
 		<plugins>
 			<plugin>
-			        <groupId>org.codehaus.mojo</groupId>
-			        <artifactId>findbugs-maven-plugin</artifactId>
-			        <version>3.0.6-SNAPSHOT</version>
-		      </plugin>
-		      <plugin>
-		          <groupId>com.github.spotbugs</groupId>
-		          <artifactId>spotbugs-maven-plugin</artifactId>
-		          <version>3.1.12.2</version>
-		      </plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-javadoc-plugin</artifactId>
+		        <version>3.0.1</version>
+			</plugin>
+
+			 <plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+			    <artifactId>maven-checkstyle-plugin</artifactId>
+			    <version>3.0.0</version>
+			    <reportSets>
+				  <reportSet>
+				    <reports>
+					  <report>checkstyle</report>
+				    </reports>
+				  </reportSet>
+			    </reportSets>
+		</plugin>
+
+		<plugin>
+		       <groupId>org.codehaus.mojo</groupId>
+			    <artifactId>findbugs-maven-plugin</artifactId>
+			    <version>3.0.5</version>
+	      </plugin>
+	      <plugin>
+	          <groupId>com.github.spotbugs</groupId>
+	          <artifactId>spotbugs-maven-plugin</artifactId>
+	          <version>3.1.12.2</version>
+	      </plugin>
+
+ 
 		</plugins>
  </reporting>
 
@@ -173,21 +189,6 @@
 		</plugin>
 	
 
-
-		<!-- Javadoc -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.1.1</version>
-			</plugin>
-
-			<!-- Checkstyle -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>3.1.0</version>
-			</plugin>
-       
        		<!-- Transformation du jar en exécutable -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

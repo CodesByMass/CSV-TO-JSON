@@ -24,32 +24,24 @@ public class CsvJsonConverter {
 
 	/**
 	 * Cleans the CSV file, removes extra-spaces, double_quotes, escaping chars...
-	 * 
-	 * @param parsed_list
-	 * It's the parsed list by the CSVMapper
-	 * 
-	 * @see CSVJsonConverter.ConvertToJson(File CSV_File)
-	 * 
-	 * @return A cleaned ArrayList
-	 *
-	 * @throws NullPointerException
-	 * 		
-	 * 
+	 * It's the parsed list by the CSVMapper		
 	 */
 	
 	public static List<Map<String, String>> cleanCSV(List<Map<String, String>> parsed_list) throws NullPointerException
 	{
-		// Initialize variables
+		/** Initialize variables
+		 */
 		List<Map<String, String>> temp_list = new ArrayList<Map<String, String>>() ;
 		Map<String, String> temp_map = new LinkedHashMap<String, String>();
-		// We clean the list
+		/** We clean the list
+		 * 
+		 */
 		for (Map<String, String> map : parsed_list) {
 			temp_map = new LinkedHashMap<String, String>();
 		    for (Map.Entry<String, String> entry : map.entrySet()) {
 		        String key = entry.getKey().trim().replace("\"", "");
 		        String value = entry.getValue().trim().replace("\"", "") ;
 		        temp_map.put(key, value) ;
-		  
 		    }
 		    temp_list.add(temp_map) ;
 		}
@@ -74,8 +66,9 @@ public class CsvJsonConverter {
 	{
 
 	File csvFile = new File(CSV_File) ;
-	// Get the name of the file, for the new one in JSON
-	// EDIT: Deprecated since the chief Abdoulaye wanted two strings in the params
+	/** Get the name of the file, for the new one in JSON
+	* EDIT: Deprecated since the chief Abdoulaye wanted two strings in the params
+	*/
 	// String file_name = csvFile.getName().replaceFirst("[.][^.]+$", "");;
 	CsvMapper mapper = new CsvMapper();
 	CsvSchema schema = CsvSchema.emptySchema().withHeader().withColumnSeparator(';'); // use first row as header; otherwise defaults are fine
@@ -83,17 +76,25 @@ public class CsvJsonConverter {
 	   .with(schema)
 	   .readValues(csvFile);
 	
-	// We extract a list from the mapping Iterator
+	/** We extract a list from the mapping Iterator
+	 * 
+	 */
 	List<Map<String, String>> readObjectsFromCsv = it.readAll() ;
-	// Clean the list
+	/** Clean the list
+	 * 
+	 */
 	readObjectsFromCsv = cleanCSV(readObjectsFromCsv) ;
 	
-	// Build the JSON file
+	/** Build the JSON file
+	 * 
+	 */
 	try {
 		
 		ObjectMapper mapperObject = new ObjectMapper() ;
 		
-		// Write JSON formated data to output.json file
+		/** Write JSON formated data to output.json file
+		 * 
+		 */
 		mapperObject.writerWithDefaultPrettyPrinter().writeValue(new File(JSON_File),readObjectsFromCsv);
 
 		

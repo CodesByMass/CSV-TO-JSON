@@ -22,11 +22,6 @@ public class WriteCsv {
 	
     /**
      * Écrivez le CSV donné d'un json plat dans le fichier donné.
-     * @param fluxJson
-     * @param separator
-     * @param fileName
-     * @param headers
-     * @throws  IOException
      */
     public static void writetocsv(List<Map<String, String>> string_Json, String separator, String fileName, Set<String> headers){
     	String csvString;
@@ -48,11 +43,7 @@ public class WriteCsv {
     }    
 
     /**
-     * Obtenez des comlumns séparés en utilisant un séparateur (virgule, demi-colonne, tabulation).
-     * @param headers
-     * @param  map
-     * @param separator
-   
+     * Obtenez des comlumns séparés en utilisant un séparateur (virgule, demi-colonne, tabulation)
      */
     private static String entete_sep(Set<String> headers, Map<String, String> map, String separator) {
         List<String> art= new ArrayList<String>();
@@ -68,11 +59,6 @@ public class WriteCsv {
 
     /**
       * Obtenez l'en-tête ordonné CSV
-     * @param fluxJson
-     * @param separator
-     * @param fileName
-     * @param headers
-     * @throws  IOException
      */
     public static Set<String> ecriture_csv(List<Map<String, String>> string_Json) {
         Set<String> ent = new TreeSet<String>();

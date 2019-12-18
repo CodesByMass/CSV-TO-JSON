@@ -22,11 +22,7 @@ public class ReadJson {
 	 
      /**
      * Analyser la chaîne JSON
-     * 
-     * @param json
-     * 
-     * @throws  JSONException
-     
+     *   
      */
     public static List<Map<String, String>> tarit_Json(String json) {
         List<Map<String, String>> string_Json = null;
@@ -43,15 +39,9 @@ public class ReadJson {
        }
     /**
      * Analyser le fichier JSON en utilisant l'encodage de caractères spécifié
-     *
-     * @param file
-     * 
-     * @param encodage 
-     * 
      * l'encodage de caractères spécifié
      * 
-     * @throws  IOException
-     **/
+     */
     public static List<Map<String, String>> parseJson(File file, String encodage) {
         List<Map<String, String>> string_Json = null;
         String json = "";
@@ -67,10 +57,7 @@ public class ReadJson {
     }
      /**
       * Analyser un objet JSON 
-     * @param JSONObject 
-     * 
-     * @throws  JSONException
-     **/
+      */
     public static Map<String, String> parse_JSONObject(JSONObject jsonObject) {
         Map<String, String> string_Json = new LinkedHashMap<String, String>();
         trans_JSON_OBJECT(jsonObject, string_Json, "");
@@ -80,9 +67,6 @@ public class ReadJson {
 
     /**
      * Analyser un tableau JSON
-     * @param JSONArray  
-     * 
-     * @throws  JSONException
      */
     public static List<Map<String, String>> parse_JSONArray(JSONArray jsonArray) {
         JSONObject jsonObject = null;
@@ -105,9 +89,6 @@ public class ReadJson {
 
     /**
      * Gérer la chaîne JSON comme un tableau
-     * @param  json 
-     * 
-     * @throws  JSONException
      */
     private static List<Map<String, String>> manipuler_AsArray(String json) {
         List<Map<String, String>> string_Json = null;
@@ -124,10 +105,6 @@ public class ReadJson {
 
     /**
     * Aplatir l'objet JSON donné
-    * @param obj
-     * @param fluxJson
-     * @param prefix
-     * @throws  JSONException
     */
     private static void trans_JSON_OBJECT(JSONObject obj, Map<String, String> string_Json, String prefix) {
         Iterator Conteneur = obj.keys();
@@ -165,10 +142,6 @@ public class ReadJson {
 
      /**
      * Aplatir le tableau JSON donné
-     * @param obj
-     * @param fluxJson
-     * @param prefix
-     * @throws  JSONException
      */
     private static void trans_JSON_ARRAY(JSONArray obj, Map<String, String> string_Json, String prefix) {
         int length = obj.length();

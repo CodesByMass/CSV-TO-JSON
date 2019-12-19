@@ -4,6 +4,6 @@ public class FileNotExistException extends Exception {
 	
 	public FileNotExistException () {
 		System.err.println("Le fichier en entré n'existe pas");
-		
+		System.exit(1);
 	}
 }

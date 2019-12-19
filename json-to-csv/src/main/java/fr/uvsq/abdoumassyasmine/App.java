@@ -2,6 +2,7 @@ package fr.uvsq.abdoumassyasmine;
 
 import java.util.Scanner;
 import java.io.File;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -47,32 +48,6 @@ public class App
         WriteCsv.writetocsv( string_json, ";", file_out, header);
 	}
 	
-	/**
-	 * La methode qui permet de savoir si un fichier existe
-	 * 
-	 * @param directory
-	 *chaine 
-	 *
-	 * @param file
-	 * fichier
-	 * 
-	 * @return
-	 * si le fichier existe ou non 
-	 * 
-	 */
-	public static int checkExistsFile(String directory, String file){
-		try (Stream<Path> walk = Files.walk(Paths.get(directory))){
-
-			List<String> result = walk.map(x -> x.toString())
-					.filter(f -> f.contains(file))
-					.collect(Collectors.toList());
-			//result.forEach(System.out::println);
-			if(result.isEmpty()) {return 0;}
-		}catch (IOException e){
-			e.printStackTrace();
-		}
-		return 1;
-	}
 	
 	/**
 	 * 
@@ -92,24 +67,29 @@ public class App
 	public static void ihm()throws IOException, NullPointerException,InvalidFileTypeException,FileNotExistException{
 		int choix;
 		boolean arret = false;
+		boolean ok = false ;
 		String file_in ="";
 		String file_out ="";
-		String directory = "";
-		
 		Scanner _sc = new Scanner(System.in,"UTF-8");
-		System.out.println("Entrée le path de l'application:");
-		if(_sc.hasNext()){
-			directory = _sc.nextLine();
-		}
+		
 		while(arret == false){
-			System.out.println("CONVERTION CSV TO JSON/JSON TO CSV");
-			System.out.println("	1. Json to Csv");
-			System.out.println("	2. Csv to Json");
+			System.out.println("Conversion CSV->JSON / JSON->CSV");
+			System.out.println("	1. Json->Csv");
+			System.out.println("	2. Csv->Json");
 			System.out.println("	3. Quitter ");
-			
+			// By Massyl Selmi : We check if the input is 1, 2 or 3. But it's a hack, not a good practice due to lack of time
+			try {
 			choix = _sc.nextInt();
+			ok = true ;
+			} catch (InputMismatchException e) {
+				throw new InputMismatchException(" Choix incorrect");
+			} finally {
+				if (ok == false) {
+					ihm();
+				}
+			}
 			if(choix == 1){
-				System.out.println("Veillez Saisir le nom du fichier d'entrée : ");
+				System.out.println("Veuillez Saisir le nom du fichier d'entrée : ");
 				file_in = _sc.nextLine();
 				/**
 				 * Obligation de l'utilisateur à taper quelque chose avant de passer
@@ -122,7 +102,7 @@ public class App
 				 * si c'est un .json
 				 */
 				if(file_in.endsWith(".json") == true){
-					if(checkExistsFile(directory, file_in)==1){
+					if(new File("file_in").exists()){
 						System.out.println("Veillez Saisir le nom du fichier de sortie : ");
 						file_out = _sc.nextLine();
 						while(file_out.isEmpty()){
@@ -132,9 +112,7 @@ public class App
 							System.out.println("Souhaitez vous convertir o/n?");
 							String c = _sc.nextLine();
 							if(c.charAt(0) == 'o'){
-								/**
-								 * appel de la fonction de conversion jsonTocsv
-								 */
+								// Appel de la fonction de conversion
 								jsonTocsv(file_in,file_out);
 								System.out.println("Conversion terminée");
 								arret = true;
@@ -149,7 +127,8 @@ public class App
 						throw new FileNotExistException();
 					}
 				}
-				else { throw new InvalidFileTypeException();}
+				else { throw new InvalidFileTypeException();
+				}
 			}
 			else if(choix == 2){
 				System.out.println("Veillez Saisir le nom du fichier d'entrée : ");
@@ -162,8 +141,8 @@ public class App
 				 * si c'est un .json
 				 */
 				if(file_in.endsWith(".csv")==true){
-					if(checkExistsFile(directory, file_in)==1){	
-						System.out.println("Veillez Saisir le nom du fichier de sortie : ");
+					if(new File("file_in").exists()){	
+						System.out.println("Veuillez Saisir le nom du fichier de sortie : ");
 						file_out = _sc.nextLine();
 						while(file_out.isEmpty()){
 							file_out = _sc.nextLine();
@@ -194,7 +173,7 @@ public class App
 				}
 			}
 			else{
-				System.out.println("bye bye");
+				System.out.println("Au revoir");
 				arret = true;
 			}
 			_sc.close();		

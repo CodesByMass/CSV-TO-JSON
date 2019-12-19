@@ -25,14 +25,10 @@ import java.util.Map;
  * It contains 3 methods :
  * </p>
  * 
- * <ul>
- * parseCSV binds and parses a CSV file into a list of maps.
- * <ul>
- * cleanCSV creates a cleanest structure of the csv data, ready to be written
- * into JSON file
- * </ul>
- * <ul>
- * convertToJson calls the two above methods then generates the JSON file
+ * <ul> 
+ * <li> parseCSV binds and parses a CSV file into a list of maps 
+ * <li> cleanCSV creates a cleanest structure of the csv data, ready to be written into JSON file
+ * <li> convertToJson calls the two above methods then generates the JSON file 
  * </ul>
  * 
  * @author Mass' Selmi
@@ -82,13 +78,13 @@ public class CsvJsonConverter {
 	/**
 	 * Cleans the CSV file, removes extra-spaces, double_quotes, escaping chars...
 	 * 
-	 * @param parsed_list It's the parsed list by the CSVMapper
+	 *@param parsed_list It's the parsed list by the CSVMapper
 	 * 
-	 * @see #CSVJsonConverter.convertToJson(String CSV_File, String JSON_File)
+	 *@see #convertToJson(String CSV_File, String JSON_File)
 	 * 
-	 * @return A cleaned ArrayList
+	 *@return A cleaned ArrayList
 	 *
-	 * @throws NullPointerException
+	 *@throws NullPointerException When the param is null, hence there is no data
 	 * 
 	 * 
 	 */

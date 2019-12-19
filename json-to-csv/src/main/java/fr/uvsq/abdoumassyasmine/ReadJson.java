@@ -114,7 +114,7 @@ public class ReadJson {
     * 
     * @return string json
     */
-    private static List<Map<String, String>> manipuler_AsArray(String json) {
+    static List<Map<String, String>> manipuler_AsArray(String json) {
         List<Map<String, String>> string_Json = null;
 
         try {

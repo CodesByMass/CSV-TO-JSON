@@ -56,7 +56,7 @@ public class CsvJsonConverter {
    mapper.disable(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY);
    // mapper.enable(CsvParser.Feature.SKIP_EMPTY_LINES);
    // Build the CSVschema
-   CsvSchema schema = CsvSchema.emptySchema().withHeader().withColumnSeparator(';'); // use first row as header;
+   CsvSchema schema = CsvSchema.emptySchema().withHeader().withColumnSeparator(','); // use first row as header;
    // otherwise defaults are
    // fine
    MappingIterator<Map<String, String>> it = null;

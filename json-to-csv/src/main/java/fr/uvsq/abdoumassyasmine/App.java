@@ -45,7 +45,7 @@ public class App
     	List<Map<String, String>>  string_json = ReadJson.tarit_Json(chaine);
    	 	string_json = ReadJson.parseJson(new File(file_in), "UTF-8");
         Set<String> header =  WriteCsv.ecriture_csv(string_json);
-        WriteCsv.writetocsv( string_json, ";", file_out, header);
+        WriteCsv.writetocsv( string_json, ",", file_out, header);
 	}
 	
 	
@@ -102,7 +102,7 @@ public class App
 				 * si c'est un .json
 				 */
 				if(file_in.endsWith(".json") == true){
-					if(new File("file_in").exists()){
+					if(!(new File("file_in").exists())){
 						System.out.println("Veillez Saisir le nom du fichier de sortie : ");
 						file_out = _sc.nextLine();
 						while(file_out.isEmpty()){
@@ -141,7 +141,7 @@ public class App
 				 * si c'est un .json
 				 */
 				if(file_in.endsWith(".csv")==true){
-					if(new File("file_in").exists()){	
+					if(!(new File("file_in").exists())){	
 						System.out.println("Veuillez Saisir le nom du fichier de sortie : ");
 						file_out = _sc.nextLine();
 						while(file_out.isEmpty()){

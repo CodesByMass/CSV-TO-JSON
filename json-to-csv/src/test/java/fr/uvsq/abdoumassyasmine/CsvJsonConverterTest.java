@@ -115,8 +115,8 @@ public class CsvJsonConverterTest {
          data.put("Nom", "Lopes");
          data.put("Prenom", "Stephane");
          parsed.add(data);
-         FileUtils.write(mockFile_good, "Nom;Prenom \n"
-         		+ "Lopes;Stephane", "UTF-8"); 
+         FileUtils.write(mockFile_good, "Nom,Prenom \n"
+         		+ "Lopes,Stephane", "UTF-8"); 
          assertEquals(parsed,CsvJsonConverter.parseCSV(mockFile_good));
 	}
 	

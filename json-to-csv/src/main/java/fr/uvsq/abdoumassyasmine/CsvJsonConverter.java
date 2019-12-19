@@ -1,11 +1,21 @@
 package fr.uvsq.abdoumassyasmine;
 
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.databind.*;
-import com.fasterxml.jackson.dataformat.csv.*;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.MappingIterator;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.csv.CsvMapper;
+import com.fasterxml.jackson.dataformat.csv.CsvMappingException;
+import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 
 /**
  * 
@@ -17,37 +27,84 @@ import com.fasterxml.jackson.dataformat.csv.*;
  * 
  * @author Mass' Selmi
  *  
- * @version 1.0
+ * @version 1.1
  */
 public class CsvJsonConverter {
 
+	/**
+	 * Parse the CSV file in a list
+	 * 
+	 * @param parsed_list
+	 * It's the parsed list by the CSVMapper
+	 * 
+	 * @see convertToJson(String CSV_File, String JSON_File)
+	 * 
+	 * @return an  ArrayList with the CSV data parsed.
+	 *
+	 * @throws IOException 
+	 * Occurs with the file is empty, or unreadable
+	 * 		
+	 */
+	public static List<Map<String, String>> parseCSV(File csvFile) throws IOException
+	{
+		List<Map<String, String>> temp_list = new ArrayList<Map<String, String>>() ;
+		// Build the CSVmapper
+		CsvMapper mapper = new CsvMapper();
+		mapper.disable(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY);
+		//mapper.enable(CsvParser.Feature.SKIP_EMPTY_LINES);
+		// Build the CSVschema
+		CsvSchema schema = CsvSchema.emptySchema().withHeader().withColumnSeparator(';'); // use first row as header; otherwise defaults are fine
+		MappingIterator<Map<String, String>> it = null;
+		try {
+			it = mapper.readerFor(Map.class)
+					.with(schema)
+					.readValues(csvFile);
+		} catch (CsvMappingException e)
+		{
+			System.out.println(" Le fichier CSV est incorrect");
+		}
+
+		// Return a list from the MappingIterator
+		if ( it == null) {
+			throw new NullPointerException("Le fichier n'a pas pu être convertit");
+		}
+		else {
+			temp_list = it.readAll() ;
+		} 
+		return temp_list ;
+	}
 
 	/**
 	 * Cleans the CSV file, removes extra-spaces, double_quotes, escaping chars...
 	 * It's the parsed list by the CSVMapper		
 	 */
-	
+
 	public static List<Map<String, String>> cleanCSV(List<Map<String, String>> parsed_list) throws NullPointerException
 	{
-		/** Initialize variables
-		 */
-		List<Map<String, String>> temp_list = new ArrayList<Map<String, String>>() ;
-		Map<String, String> temp_map = new LinkedHashMap<String, String>();
-		/** We clean the list
-		 * 
-		 */
-		for (Map<String, String> map : parsed_list) {
-			temp_map = new LinkedHashMap<String, String>();
-		    for (Map.Entry<String, String> entry : map.entrySet()) {
-		        String key = entry.getKey().trim().replace("\"", "");
-		        String value = entry.getValue().trim().replace("\"", "") ;
-		        temp_map.put(key, value) ;
-		    }
-		    temp_list.add(temp_map) ;
+		if (parsed_list == null)
+		{
+			throw new NullPointerException(" La conversion a échoué");
 		}
-		
-		return temp_list;
-		
+		else
+		{
+			// Initialize variables
+			List<Map<String, String>> temp_list = new ArrayList<Map<String, String>>() ;
+			Map<String, String> temp_map = new LinkedHashMap<String, String>();
+			// We clean the list
+			for (Map<String, String> map : parsed_list) {
+				temp_map = new LinkedHashMap<String, String>();
+				for (Map.Entry<String, String> entry : map.entrySet()) {
+					String key = entry.getKey().trim().replace("\"", "");
+					String value = entry.getValue().trim().replace("\"", "") ;
+					temp_map.put(key, value) ;
+
+				}
+				temp_list.add(temp_map) ;
+			}
+
+			return temp_list;
+		}
+
 	}
 	/**
 	 * 
@@ -64,46 +121,43 @@ public class CsvJsonConverter {
 	 */
 	public static void convertToJson(String CSV_File, String JSON_File) throws IOException
 	{
+		// ! The string contains the full name, with the extension
+		File csvFile = new File(CSV_File) ;
+		//Check if the file exists
+		if (!csvFile.exists())
+		{
+			throw new FileNotFoundException(" Le fichier spécifié est introuvable") ;
+		}
+		else 
+		{
+			/* Get the name of the file, for the new one in JSON
+	/ Deprecated since the chief Abdoulaye wanted two strings in the params
+	/ String file_name = csvFile.getName().replaceFirst("[.][^.]+$", "");
+			 */
 
-	File csvFile = new File(CSV_File) ;
-	/** Get the name of the file, for the new one in JSON
-	* EDIT: Deprecated since the chief Abdoulaye wanted two strings in the params
-	*/
-	// String file_name = csvFile.getName().replaceFirst("[.][^.]+$", "");;
-	CsvMapper mapper = new CsvMapper();
-	CsvSchema schema = CsvSchema.emptySchema().withHeader().withColumnSeparator(';'); // use first row as header; otherwise defaults are fine
-	MappingIterator<Map<String,String>> it = mapper.readerFor(Map.class)
-	   .with(schema)
-	   .readValues(csvFile);
-	
-	/** We extract a list from the mapping Iterator
-	 * 
-	 */
-	List<Map<String, String>> readObjectsFromCsv = it.readAll() ;
-	/** Clean the list
-	 * 
-	 */
-	readObjectsFromCsv = cleanCSV(readObjectsFromCsv) ;
-	
-	/** Build the JSON file
-	 * 
-	 */
-	try {
-		
-		ObjectMapper mapperObject = new ObjectMapper() ;
-		
-		/** Write JSON formated data to output.json file
-		 * 
-		 */
-		mapperObject.writerWithDefaultPrettyPrinter().writeValue(new File(JSON_File),readObjectsFromCsv);
 
-		
-		} catch (JsonGenerationException e) {
-			e.printStackTrace();
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+
+			// We extract a list from the mapping Iterator
+			List<Map<String, String>> readObjectsFromCsv = parseCSV(csvFile) ;
+			// Clean the list
+			readObjectsFromCsv = cleanCSV(readObjectsFromCsv) ;
+
+			// Build the JSON file
+			try {
+
+				ObjectMapper mapperObject = new ObjectMapper() ;
+
+				// Write JSON formated data to output.json file
+				mapperObject.writerWithDefaultPrettyPrinter().writeValue(new File(JSON_File),readObjectsFromCsv);
+
+
+			} catch (JsonGenerationException e) {
+				e.printStackTrace();
+			} catch (JsonMappingException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
-	}
+}

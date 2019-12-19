@@ -1,6 +1,6 @@
-# CSV-TO-JSON
+# CSV->JSON|JSON->CSV converter
 
-# Projet CProg - 2019
+# Projet JAVA - 2019
 
 
 # Guide d'utilisation

@@ -19,11 +19,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import fr.uvsq.abdoumassyasmine.*;
 public class ReadJson {
-	 
-     /**
-     * Analyser la chaîne JSON
-     *   
-     */
+	/**
+	 * Analyser la chaîne JSON
+	 * 
+	 * @param json
+	 * chaine json 
+	 * 
+	 * @return chaine_json
+	 */
     public static List<Map<String, String>> tarit_Json(String json) {
         List<Map<String, String>> string_Json = null;
        try {
@@ -37,11 +40,18 @@ public class ReadJson {
 
         return string_Json;
        }
-    /**
-     * Analyser le fichier JSON en utilisant l'encodage de caractères spécifié
+   /**
+    * Analyser le fichier JSON en utilisant l'encodage de caractères spécifié
      * l'encodage de caractères spécifié
      * 
-     */
+    * @param file
+    * fichier json 
+    * 
+    * @param encodage
+    * l'encodage de caractères spécifié
+    * 
+    * @return string_json
+    */
     public static List<Map<String, String>> parseJson(File file, String encodage) {
         List<Map<String, String>> string_Json = null;
         String json = "";
@@ -55,19 +65,28 @@ public class ReadJson {
             string_Json = tarit_Json(json);
          return string_Json;
     }
-     /**
-      * Analyser un objet JSON 
-      */
+    /**
+     *  Analyser un objet JSON 
+     *  
+     * @param jsonObject
+     * object json 
+     * 
+     * @return string json
+     */
     public static Map<String, String> parse_JSONObject(JSONObject jsonObject) {
         Map<String, String> string_Json = new LinkedHashMap<String, String>();
         trans_JSON_OBJECT(jsonObject, string_Json, "");
 
         return string_Json;
     }
-
-    /**
-     * Analyser un tableau JSON
-     */
+/**
+ * Analyser un tableau JSON
+ * 
+ * @param jsonArray
+ * tableau json 
+ * 
+ * @return chaine
+ */
     public static List<Map<String, String>> parse_JSONArray(JSONArray jsonArray) {
         JSONObject jsonObject = null;
         List<Map<String, String>> string_Json = new ArrayList<Map<String, String>>();
@@ -87,9 +106,14 @@ public class ReadJson {
         return string_Json;
     }
 
-    /**
-     * Gérer la chaîne JSON comme un tableau
-     */
+   /**
+    *  * Gérer la chaîne JSON comme un tableau
+    *  
+    * @param json
+    * chaine json 
+    * 
+    * @return string json
+    */
     private static List<Map<String, String>> manipuler_AsArray(String json) {
         List<Map<String, String>> string_Json = null;
 
@@ -104,8 +128,17 @@ public class ReadJson {
     }
 
     /**
-    * Aplatir l'objet JSON donné
-    */
+     *  Aplatir l'objet JSON donné
+     *  
+     * @param obj
+     * json object 
+     * 
+     * @param string_Json
+     * chaine json 
+     * 
+     * @param prefix
+     * prefix
+     */
     private static void trans_JSON_OBJECT(JSONObject obj, Map<String, String> string_Json, String prefix) {
         Iterator Conteneur = obj.keys();
         String _prefix = prefix != "" ? prefix + "." : "";
@@ -140,9 +173,18 @@ public class ReadJson {
 
     }
 
-     /**
-     * Aplatir le tableau JSON donné
-     */
+  /**
+   * Aplatir le tableau JSON donné
+   * 
+   * @param obj
+   * json array 
+   * 
+   * @param string_Json
+   * chaine json 
+   * 
+   * @param prefix
+   * prefix
+   */
     private static void trans_JSON_ARRAY(JSONArray obj, Map<String, String> string_Json, String prefix) {
         int length = obj.length();
 

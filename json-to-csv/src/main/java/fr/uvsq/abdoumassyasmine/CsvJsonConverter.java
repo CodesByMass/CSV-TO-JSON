@@ -20,10 +20,10 @@ import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 /**
  * 
  * 
- * <b>This basically converts a CSV File into a JSON file</b>
- * <p> It contains two functions :  </p>
- * <ul> convertToJson bind, parse the csv file then write the json </ul>
- * <ul> cleanCSV creates a cleanest structure of the csv data, ready to be written into JSON file </ul>
+ * This basically converts a CSV File into a JSON file
+ *  It contains two functions :  
+ *  convertToJson bind, parse the csv file then write the json 
+ * cleanCSV creates a cleanest structure of the csv data, ready to be written into JSON file 
  * 
  * @author Mass' Selmi
  *  
@@ -34,15 +34,13 @@ public class CsvJsonConverter {
 	/**
 	 * Parse the CSV file in a list
 	 * 
-	 * @param parsed_list
+	 * @param csvFile
 	 * It's the parsed list by the CSVMapper
 	 * 
-	 * @see convertToJson(String CSV_File, String JSON_File)
 	 * 
 	 * @return an  ArrayList with the CSV data parsed.
 	 *
-	 * @throws IOException 
-	 * Occurs with the file is empty, or unreadable
+	 * @throws IOException Occurs with the file is empty, or unreadable
 	 * 		
 	 */
 	public static List<Map<String, String>> parseCSV(File csvFile) throws IOException
@@ -76,7 +74,16 @@ public class CsvJsonConverter {
 
 	/**
 	 * Cleans the CSV file, removes extra-spaces, double_quotes, escaping chars...
-	 * It's the parsed list by the CSVMapper		
+	 * 
+	 * @param parsed_list
+	 * It's the parsed list by the CSVMapper
+	 *  
+	 *  
+	 * @return A cleaned ArrayList
+	 *
+	 * @throws NullPointerException exception
+	 * 
+	 * 
 	 */
 
 	public static List<Map<String, String>> cleanCSV(List<Map<String, String>> parsed_list) throws NullPointerException

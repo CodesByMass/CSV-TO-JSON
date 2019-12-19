@@ -18,12 +18,24 @@ import java.nio.file.Paths;
 public class App 
 {
 	/**
-	 * La methode qui permet de convertir un fichier 
+	 *  * La methode qui permet de convertir un fichier 
 	 * json en csv
+	 * 
+	 * @param file_in
+	 * fichier d entrée 
+	 * 
+	 * @param file_out
+	 * fichier de sortie 
+	 * 
+	 * @throws IOException
+	 *  des exceptions levées lors de l'accès aux informations à l'aide de flux, de fichiers et de répertoires.
+	 *  
+	 * @throws NullPointerException
+	 * exception est lancée lorsqu'une application tente d'utiliser un objet null 
+	 * 
 	 */
 	public static void jsonTocsv(String file_in, String file_out)throws IOException, NullPointerException{
-		ReadJson parser = new  ReadJson();
-		WriteCsv writer = new WriteCsv();
+		
 
     	String chaine="" ;
    	    /*
@@ -37,6 +49,16 @@ public class App
 	
 	/**
 	 * La methode qui permet de savoir si un fichier existe
+	 * 
+	 * @param directory
+	 *chaine 
+	 *
+	 * @param file
+	 * fichier
+	 * 
+	 * @return
+	 * si le fichier existe ou non 
+	 * 
 	 */
 	public static int checkExistsFile(String directory, String file){
 		try (Stream<Path> walk = Files.walk(Paths.get(directory))){
@@ -53,9 +75,19 @@ public class App
 	}
 	
 	/**
-	 * Cette methode represente l'interface entre l'utilisateur
-	 * et l'application
-	 * elle gère les entrées et sorties du
+	 * 
+	 * 
+	 * @throws IOException
+	 *  des exceptions levées lors de l'accès aux informations à l'aide de flux, de fichiers et de répertoires.
+	 *  
+	 * @throws NullPointerException
+	 * exception est lancée lorsqu'une application tente d'utiliser un objet null 
+	 * 
+	 * @throws InvalidFileTypeException
+	 * un fichier n est pas valide 
+	 * 
+	 * @throws FileNotExistException
+	 * le fichier n'existe pas 
 	 */
 	public static void ihm()throws IOException, NullPointerException,InvalidFileTypeException,FileNotExistException{
 		int choix;
@@ -169,7 +201,23 @@ public class App
 		}
 }
 
-	
+	/**
+	 * 
+	 * @param args
+	 * parametre de main
+	 * 
+	 * @throws IOException
+	 *  des exceptions levées lors de l'accès aux informations à l'aide de flux, de fichiers et de répertoires.
+	 *  
+	 * @throws NullPointerException
+	 * exception est lancée lorsqu'une application tente d'utiliser un objet null 
+	 * 
+	 * @throws InvalidFileTypeException
+	 * un fichier n est pas valide 
+	 * 
+	 * @throws FileNotExistException
+	 * le fichier n'existe pas 
+	 */
     public static void main( String[] args )throws IOException, NullPointerException,InvalidFileTypeException,FileNotExistException{
     	ihm();
     }

@@ -20,7 +20,7 @@ import org.junit.rules.TemporaryFolder;
 import com.fasterxml.jackson.dataformat.csv.CsvMappingException;
 
 /**
- * <b> This tests all the functions of the CsvJsonConverter class
+ * <b> This tests all the functions of the CsvJsonConverter class. </b>
  * 
  * @author Mass' Selmi
  * 
@@ -31,23 +31,23 @@ import com.fasterxml.jackson.dataformat.csv.CsvMappingException;
 public class CsvJsonConverterTest {
 	
 	/**
-	 * Uses the temporary folder of Junit to mock files
+	 * Uses the temporary folder of Junit to mock files.
 	 */
 	@Rule
 	public TemporaryFolder folder= new TemporaryFolder();
 
-	String wrong_string = "\r\n" + 
+	private String wrong_string = "\r\n" + 
 			"2\r\n" + 
 			"3\r\n" + 
 			"4\r\n" + 
 			"5	0 ";
 
-	File mockFile_empty = null ;
-	File mockFile_good = null ;
-	File mockFile_wrong = null ;
-	File exemple = null ;
+	private File mockFile_empty = null ;
+	private File mockFile_good = null ;
+	private File mockFile_wrong = null ;
+	private File exemple = null ;
 	
-	List<Map<String, String>> parsed = new ArrayList<Map<String, String>>() ;
+	private List<Map<String, String>> parsed = new ArrayList<Map<String, String>>() ;
 
 
 
@@ -64,8 +64,8 @@ public class CsvJsonConverterTest {
 	}
 
 	/**
-	 * Tests if the Parser ignores empty files
-	 * Should find that the Mapper doesn't find anything
+	 * Tests if the Parser ignores empty files.
+	 * Should find that the Mapper doesn't find anything.
 	 * 
 	 * @throws IOException
 	 */
@@ -75,7 +75,7 @@ public class CsvJsonConverterTest {
 	}
 
 	/**
-	 * Tests a normal CSV file
+	 * Tests a normal CSV file.
 	 * 
 	 * @throws IOException
 	 */
@@ -85,7 +85,7 @@ public class CsvJsonConverterTest {
 	}
 
 	/**
-	 * Tests a corrupted CSV File
+	 * Tests a corrupted CSV File.
 	 * 
 	 * @throws IOException
 	 */
@@ -95,7 +95,7 @@ public class CsvJsonConverterTest {
 	}
 	
 	/**
-	 * Tests an empty CSV File
+	 * Tests an empty CSV File.
 	 * 
 	 * @throws IOException
 	 */
@@ -105,7 +105,7 @@ public class CsvJsonConverterTest {
 	}
 
 	/**
-	 * Tests if the function actually does the job done
+	 * Tests if the function actually does the job done.
 	 * 
 	 * @throws IOException
 	 */
@@ -121,7 +121,7 @@ public class CsvJsonConverterTest {
 	}
 	
 	/**
-	 * Tests if the function throws a NullPointerException if the param is null
+	 * Tests if the function throws a NullPointerException if the param is null.
 	 */
 	@Test(expected = NullPointerException.class)
 	public void testCleanCSV_null() {
@@ -130,7 +130,7 @@ public class CsvJsonConverterTest {
 	}
 	
 	/**
-	 * Tests if the function actually does clean the list given in param
+	 * Tests if the function actually does clean the list given in param.
 	 */
 	@Test
 	public void testCleanCSV() {
@@ -147,7 +147,7 @@ public class CsvJsonConverterTest {
 	}
 	
 	/**
-	 * Detects if the file entered is not found
+	 * Detects if the file entered is not found.
 	 * 
 	 * @see fr.uvsq.abdoumassyasmine.CsvJsonConverter
 	 * 
@@ -163,7 +163,7 @@ public class CsvJsonConverterTest {
 	}
 	
 	/**
-	 * Tests if the converter converts CSV to JSON without any errors
+	 * Tests if the converter converts CSV to JSON without any errors.
 	 * 
 	 * @throws IOException
 	 */

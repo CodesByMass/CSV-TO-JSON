@@ -65,7 +65,7 @@ public class App
 	 * le fichier n'existe pas 
 	 */
 	public static void ihm()throws IOException, NullPointerException,InvalidFileTypeException,FileNotExistException{
-		int choix;
+		int choix = 0;
 		boolean arret = false;
 		boolean ok = false ;
 		String file_in ="";
@@ -82,7 +82,7 @@ public class App
 			choix = _sc.nextInt();
 			ok = true ;
 			} catch (InputMismatchException e) {
-				throw new InputMismatchException(" Choix incorrect");
+				System.err.println("Choix incorrect");
 			} finally {
 				if (ok == false) {
 					ihm();
@@ -91,6 +91,7 @@ public class App
 			if(choix == 1){
 				System.out.println("Veuillez Saisir le nom du fichier d'entrée : ");
 				file_in = _sc.nextLine();
+
 				/**
 				 * Obligation de l'utilisateur à taper quelque chose avant de passer
 				 */
@@ -102,7 +103,7 @@ public class App
 				 * si c'est un .json
 				 */
 				if(file_in.endsWith(".json") == true){
-					if(!(new File("file_in").exists())){
+					if((Files.exists(Paths.get(file_in)))){
 						System.out.println("Veillez Saisir le nom du fichier de sortie : ");
 						file_out = _sc.nextLine();
 						while(file_out.isEmpty()){
@@ -141,7 +142,7 @@ public class App
 				 * si c'est un .json
 				 */
 				if(file_in.endsWith(".csv")==true){
-					if(!(new File("file_in").exists())){	
+					if((Files.exists(Paths.get(file_in)))){	
 						System.out.println("Veuillez Saisir le nom du fichier de sortie : ");
 						file_out = _sc.nextLine();
 						while(file_out.isEmpty()){

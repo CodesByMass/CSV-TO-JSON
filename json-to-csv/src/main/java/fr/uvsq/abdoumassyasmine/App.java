@@ -92,11 +92,11 @@ public class App
 	public static void ihm()throws IOException, NullPointerException,InvalidFileTypeException,FileNotExistException{
 		int choix;
 		boolean arret = false;
-		String file_in = new String();
-		String file_out = new String();
-		String directory = new String();
+		String file_in ="";
+		String file_out ="";
+		String directory = "";
 		
-		Scanner _sc = new Scanner(System.in);
+		Scanner _sc = new Scanner(System.in,"UTF-8");
 		System.out.println("Entrée le path de l'application:");
 		if(_sc.hasNext()){
 			directory = _sc.nextLine();

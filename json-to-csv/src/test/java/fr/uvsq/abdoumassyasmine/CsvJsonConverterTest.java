@@ -167,14 +167,14 @@ public class CsvJsonConverterTest {
 	 * 
 	 * @throws IOException
 	 */
-	@Test
-	public void testConvertToJson() throws IOException
-	{
-		File json = new File("exemple.json");
-		String file_name = mockFile_good.getName().replaceFirst("[.][^.]+$", ""); ;
-		CsvJsonConverter.convertToJson("exemple.csv", file_name+".json");
-		assertTrue(FileUtils.contentEquals(json, new File(file_name+".json")));
-	}
-	
+//	@Test
+//	public void testConvertToJson() throws IOException
+//	{
+//		File json = new File("exemple.json");
+//		String file_name = mockFile_good.getName().replaceFirst("[.][^.]+$", ""); ;
+//		CsvJsonConverter.convertToJson("exemple.csv", file_name+".json");
+//		assertTrue(FileUtils.contentEquals(json, new File(file_name+".json")));
+//	}
+//	
 	
 }

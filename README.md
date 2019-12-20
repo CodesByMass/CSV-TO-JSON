@@ -2,6 +2,10 @@
 
 ## CSV->JSON | JSON->CSV converter
 
+### Project members
+Mohamed-Amokrane Selmi <br/>
+Yasmine Rabahallah <br/>
+Abdoulaye Baldé <br/>
 
 # Guide d'utilisation
 Au lancement de l'application, un menu est proposé à l'utilisateur avec 3 choix : <br/>
